@@ -1,0 +1,38 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body, html {
+    @apply bg-[#f3f4f6] dark:bg-[#1e1f21]
+}
+* {
+    overflow-y: hidden;
+}
+.header-bg {
+    @apply bg-white  dark:bg-[#2e2e30] dark:text-gray-400
+}
+
+.sidebar-active {
+    @apply bg-gray-200 dark:bg-[#454547] py-1.5 rounded-lg
+}
+
+.sidebar-hover {
+    @apply hover:bg-gray-100 dark:hover:bg-white/[.11] hover:rounded-lg
+}
+
+
+.sidebar-menu-item {
+    @apply flex flex-row items-center gap-x-2 text-slate-600 dark:text-white text-sm
+}
+
+.show-enter-active,
+.show-leave-enter {
+    transform: translateX(0);
+    transition: .3s linear;
+}
+.show-enter,
+.show-leave-to {
+    transform: translateX(-100%);
+    transition: .3s linear;
+}
+
