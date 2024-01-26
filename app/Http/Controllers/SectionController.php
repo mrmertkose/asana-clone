@@ -11,7 +11,7 @@ use Inertia\Inertia;
 class SectionController extends Controller
 {
 
-    public function __construct(private SectionRepositoryInterface $sectionRepository)
+    public function __construct(protected SectionRepositoryInterface $sectionRepository)
     {
     }
 
