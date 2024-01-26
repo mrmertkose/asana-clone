@@ -35,4 +35,14 @@ body, html {
     transform: translateX(-100%);
     transition: .3s linear;
 }
+.flip-list-move {
+    transition: transform 0.5s;
+}
+.no-move {
+    transition: transform 0s;
+}
+.ghost {
+    opacity: 0.2;
+    background: #f2f2f2;
+}
 

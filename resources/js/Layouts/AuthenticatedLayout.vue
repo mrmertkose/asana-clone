@@ -43,9 +43,9 @@ const sidebarActive = ref(true);
                                     Home
                                 </Link>
                             </li>
-                            <li :class="{'sidebar-active': $page.url.startsWith('/tasks')}"
+                            <li :class="{'sidebar-active': $page.url.startsWith('/sections')}"
                                 class="sidebar-hover py-1.5 px-2">
-                                <Link :href="route('tasks')" class="sidebar-menu-item">
+                                <Link :href="route('section.index')" class="sidebar-menu-item">
                                     <IconTask item-class="w-5 h-5 fill-gray-600 dark:fill-gray-400"/>
                                     My Tasks
                                 </Link>

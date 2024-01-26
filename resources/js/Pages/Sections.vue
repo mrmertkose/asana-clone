@@ -1,16 +1,49 @@
 <script setup>
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
-defineOptions({layout: AuthenticatedLayout})
-import {Head} from "@inertiajs/vue3";
+import {Head, router, useForm} from "@inertiajs/vue3";
 import IconLock from "@/Components/Svg/IconLock.vue";
 import IconCustomize from "@/Components/Svg/IconCustomize.vue";
 import IconFilter from "@/Components/Svg/IconFilter.vue";
 import IconSort from "@/Components/Svg/IconSort.vue";
 import IconList from "@/Components/Svg/IconList.vue";
-import IconPlus from "@/Components/Svg/IconPlus.vue";
-import IconMore from "@/Components/Svg/IconMore.vue";
-</script>
+import TaskCard from "@/Components/TaskCard.vue";
+import draggable from "vuedraggable";
+import {ref} from "vue";
 
+defineOptions({layout: AuthenticatedLayout})
+
+const props = defineProps({
+    sections: Object
+})
+const sectionsData = ref(props.sections);
+
+let drag = false;
+
+function finish() {
+    const postData = sectionsData.value.map((el, index) => {
+        return {
+            id: el.id,
+            position: index + 1
+        };
+    });
+
+    router.patch(route('section.update.position'),postData,
+        {
+            preserveScroll: true,
+        }
+    )
+}
+
+//
+// const form = useForm([
+//     sectionObject
+// ])
+
+// const addAnswerRow = () => {
+//     let position = form.answers.length > 0 ? (form.answers.length+1) : 1;
+//     form.answers.push({position:position,answer_text : '',is_correct : 0,status : 1});
+// }
+</script>
 <template>
     <Head title="My tasks"/>
     <div class="border-b dark:border-gray-600">
@@ -64,31 +97,24 @@ import IconMore from "@/Components/Svg/IconMore.vue";
         </div>
     </div>
 
-    <div class="bg-gray-50 dark:bg-[#252628]">
+    <div class="bg-gray-50 dark:bg-[#252628] h-screen">
         <div class="mx-5 mt-5 flex flex-row overflow-x-auto">
-            <div
-                class="h-screen w-1/4 flex-shrink-0 hover:border hover:dark:border-gray-600 hover:border-gray-300 rounded-lg flex flex-col">
-                <div class="flex justify-between items-center px-3 pt-2 cursor-pointer">
-                    <div class="text-gray-500 dark:text-gray-300">New Tasks</div>
-                    <div class="flex flex-row items-center gap-x-1.5">
-                        <div class="p-1 hover:rounded hover:bg-gray-200 dark:hover:bg-white/[.11]">
-                            <IconPlus item-class="w-5 h-5 fill-gray-400 dark:fill-gray-300"/>
-                        </div>
-                        <div class="p-1 hover:rounded hover:bg-gray-200 dark:hover:bg-white/[.11]">
-                            <IconMore item-class="w-4 h-4 fill-gray-400 dark:fill-gray-300"/>
-                        </div>
-                    </div>
-                </div>
 
-                <div
-                    class="mx-3 mt-2 bg-gradient-to-b to-transparent from-gray-200 dark:from-[#292a2d] rounded-lg h-screen">
-                    <div
-                        class="flex justify-center items-center mt-5 text-sm text-gray-500 dark:text-gray-400 cursor-pointer hover:bg-gray-100 hover:dark:bg-white/[.11] mx-3 hover:rounded">
-                        <IconPlus item-class="w-4 h-4 fill-gray-400 dark:fill-gray-300"/>
-                        Add Task
-                    </div>
-                </div>
-            </div>
+            <draggable
+                v-model="sectionsData"
+                @start="drag = true"
+                @end="drag = false"
+                item-key="id"
+                class="w-full flex"
+                tag="div"
+                :animation="200"
+                ghost-class="ghost"
+                @change="finish"
+            >
+                <template #item="{element}">
+                    <TaskCard :section="element" :key="element.id"/>
+                </template>
+            </draggable>
         </div>
     </div>
 </template>
