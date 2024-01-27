@@ -28,5 +28,11 @@ class DatabaseSeeder extends Seeder
             'user_id' => 1,
             'position' => 1
         ]);
+
+        Section::create([
+            'title' => '📬 New tasks 2',
+            'user_id' => 1,
+            'position' => 1
+        ]);
     }
 }

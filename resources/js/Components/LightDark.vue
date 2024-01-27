@@ -1,6 +1,7 @@
 <script setup>
-import {IconMoon, IconSun} from "@tabler/icons-vue";
 import {useDark, useToggle} from "@vueuse/core";
+import IconSun from "@/Components/Svg/IconSun.vue";
+import IconMoon from "@/Components/Svg/IconMoon.vue";
 const isDark = useDark();
 const toggleDark = useToggle(isDark);
 </script>
