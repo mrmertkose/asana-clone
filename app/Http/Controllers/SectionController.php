@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\SectionUpdatePositionRequest;
+use App\Http\Resources\SectionCollection;
+use App\Http\Resources\SectionResource;
 use App\Interfaces\SectionRepositoryInterface;
 use App\Models\Section;
 use Illuminate\Http\Request;
@@ -19,7 +21,7 @@ class SectionController extends Controller
     {
         $sections = $this->sectionRepository->getAllSections();
         return Inertia::render('Sections', [
-            'sections' => $sections
+            'sections' => SectionResource::collection($sections)
         ]);
     }
 

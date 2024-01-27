@@ -8,9 +8,13 @@ use Illuminate\Database\Eloquent\Collection;
 
 class SectionRepository implements SectionRepositoryInterface
 {
-    public function getAllSections(): Collection
+    public function __construct()
     {
-        return Section::orderBy('position')->get();
+    }
+
+    public function getAllSections(): Collection|array
+    {
+        return Section::with(['task'])->orderBy('position')->get();
     }
 
     public function updatePosition(array $arrayData): void

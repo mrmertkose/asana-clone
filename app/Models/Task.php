@@ -5,25 +5,23 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class Section extends Model
+class Task extends Model
 {
     use HasFactory;
 
     protected $fillable = [
         'title',
+        'description',
+        'start_date',
+        'due_date',
         'user_id',
-        'position'
+        'section_id',
+        'is_completed',
     ];
 
-    public function user(): BelongsTo
+    public function section(): BelongsTo
     {
-        return $this->belongsTo(User::class);
-    }
-
-    public function task(): HasMany
-    {
-        return $this->hasMany(Task::class);
+        return $this->belongsTo(Section::class);
     }
 }
