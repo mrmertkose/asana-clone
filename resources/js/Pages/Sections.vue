@@ -1,6 +1,6 @@
 <script setup>
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
-import {Head, router, useForm} from "@inertiajs/vue3";
+import {Head, router} from "@inertiajs/vue3";
 import IconLock from "@/Components/Svg/IconLock.vue";
 import IconCustomize from "@/Components/Svg/IconCustomize.vue";
 import IconFilter from "@/Components/Svg/IconFilter.vue";
@@ -26,23 +26,12 @@ function finish() {
             position: index + 1
         };
     });
-
     router.patch(route('section.update.position'),postData,
         {
             preserveScroll: true,
         }
     )
 }
-
-//
-// const form = useForm([
-//     sectionObject
-// ])
-
-// const addAnswerRow = () => {
-//     let position = form.answers.length > 0 ? (form.answers.length+1) : 1;
-//     form.answers.push({position:position,answer_text : '',is_correct : 0,status : 1});
-// }
 </script>
 <template>
     <Head title="My tasks"/>
