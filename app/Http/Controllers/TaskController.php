@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\TaskCreateRequest;
+use App\Http\Requests\Task\TaskCreateRequest;
+use App\Http\Requests\Task\TaskUpdateTitleRequest;
 use App\Models\Task;
-use Illuminate\Http\Request;
 
 class TaskController extends Controller
 {
@@ -24,6 +24,25 @@ class TaskController extends Controller
     {
         $task->delete();
 
-        return redirect()->route('section.index');
+        return redirect()->back();
     }
+
+    public function complete(Task $task)
+    {
+        $task->is_completed = true;
+        $task->save();
+
+        return redirect()->back();
+    }
+
+    public function updateTitle(Task $task,TaskUpdateTitleRequest $request)
+    {
+        $task->title = $request->validated('title');
+        $task->save();
+
+        return redirect()->back();
+    }
+
+
+
 }

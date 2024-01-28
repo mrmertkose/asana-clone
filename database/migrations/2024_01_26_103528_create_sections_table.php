@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('sections', function (Blueprint $table) {
             $table->id();
-            $table->string('title')->nullable();
+            $table->string('title')->nullable()->default('📬 New tasks');
             $table->foreignId('user_id')->constrained('users');
             $table->integer('position');
             $table->timestamps();

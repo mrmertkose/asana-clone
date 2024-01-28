@@ -15,12 +15,16 @@ Route::middleware('auth')->group(function () {
 
     Route::group(['prefix' => 'sections', 'as' => 'section.', 'controller' => SectionController::class], function () {
         Route::get('/', 'index')->name('index');
+        Route::post('/create', 'create')->name('create');
         Route::patch('/update-position', 'updatePosition')->name('update.position');
+        Route::patch('/update-title/{section}', 'updateTitle')->name('update.title');
     });
 
     Route::group(['prefix' => 'task', 'as' => 'task.', 'controller' => TaskController::class], function () {
         Route::post('/create', 'create')->name('create');
         Route::delete('/destroy/{task}', 'destroy')->name('destroy');
+        Route::patch('/complete/{task}', 'complete')->name('complete');
+        Route::patch('/update-title/{task}', 'updateTitle')->name('update.title');
     });
 
     Route::group(['prefix' => 'profile', 'as' => 'profile.', 'controller' => ProfileController::class], function () {

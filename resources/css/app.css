@@ -24,6 +24,9 @@ body, html {
 .sidebar-menu-item {
     @apply flex flex-row items-center gap-x-2 text-slate-600 dark:text-white text-sm
 }
+.without-ring {
+    @apply focus:ring-0 focus:ring-offset-0;
+}
 
 .show-enter-active,
 .show-leave-enter {
@@ -45,4 +48,5 @@ body, html {
     opacity: 0.2;
     background: #f2f2f2;
 }
+
 

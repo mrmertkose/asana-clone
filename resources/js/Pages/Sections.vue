@@ -96,6 +96,7 @@ function finish() {
                 item-key="id"
                 class="w-full flex"
                 tag="div"
+                handle=".my-handle"
                 :animation="200"
                 ghost-class="ghost"
                 @change="finish"
