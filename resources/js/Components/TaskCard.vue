@@ -15,10 +15,9 @@ const form = useForm({
 const addTaskRow = () => {
     let item = {title: '', start_date: '', due_date: '', section_id: props.section.id}
 
-    form.tasks.push(item);
-
     router.post(route('task.create'), item, {
-        preserveScroll: true
+        preserveScroll: true,
+        preserveState: false
     });
 }
 </script>
@@ -44,14 +43,12 @@ const addTaskRow = () => {
                 <template v-if="form.tasks.length > 0" v-for="item in form.tasks" :key="item.id">
                     <TaskItem :task="item"/>
                 </template>
-
                 <div
                     @click="addTaskRow"
                     class="flex justify-center items-center text-sm text-gray-500 dark:text-gray-400 cursor-pointer hover:bg-gray-100 p-2 hover:dark:bg-white/[.11] hover:rounded">
                     <IconPlus item-class="w-4 h-4 fill-gray-400 dark:fill-gray-300"/>
                     Add Task
                 </div>
-
             </div>
         </div>
     </div>

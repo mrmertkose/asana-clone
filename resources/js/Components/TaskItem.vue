@@ -3,6 +3,7 @@ import IconDate from "@/Components/Svg/IconDate.vue";
 import IconTask from "@/Components/Svg/IconTask.vue";
 import IconLike from "@/Components/Svg/IconLike.vue";
 import {router} from "@inertiajs/vue3";
+import IconTrash from "@/Components/Svg/IconTrash.vue";
 
 defineProps({
     task: Object
@@ -10,9 +11,11 @@ defineProps({
 
 const deleteItem = (id) => {
     router.delete(route('task.destroy',id), {
-        preserveScroll: true
+        preserveScroll: true,
+        preserveState: false
     })
 }
+
 </script>
 <template>
     <div class="border border-gray-400 dark:border-gray-600 rounded-lg dark:bg-[#2a2b2d] p-3">
@@ -32,7 +35,7 @@ const deleteItem = (id) => {
                     <IconDate item-class="w-3 h-3 fill-gray-400"/>
                 </div>
                 <div class="dark:hover:bg-white/[.11] p-1 rounded-full cursor-pointer" @click="deleteItem(task.id)">
-                    <IconLike item-class="h-3 w-3 fill-gray-400"/>
+                    <IconTrash item-class="h-3 w-3 dark:text-gray-300"/>
                 </div>
             </div>
 
